@@ -1,50 +1,48 @@
-# ⚡ Simulador Avançado de Circuitos em Corrente Alternada (CA)
+# ⚡ Simulador Avançado de Circuitos em CA - Versão 2.0 (Python/Tkinter)
 
-## 🎓 Contexto do Projeto
+## 🎓 Contexto do Projeto e Evolução
 
-Este projeto consiste em um simulador de circuitos em Corrente Alternada (CA) com análise fasorial, desenvolvido como trabalho prático para a disciplina de **Circuitos Elétricos II** (ou similar) do curso de Engenharia da Computação. O foco é permitir que o usuário construa circuitos complexos através da adição sequencial de grupos (série ou paralelo) e visualize os resultados completos da simulação na frequência base.
+Este projeto começou como um trabalho da disciplina de Circuitos II e evoluiu de um aplicativo funcional (V1) para uma **ferramenta profissional e interativa (V2.0)**. A arquitetura manteve o Python/Tkinter, mas foi totalmente aprimorada com novas bibliotecas para modernizar a interface e adicionar recursos de análise avançada e documentação.
 
-A interface gráfica (GUI) foi construída com **Tkinter**, e as análises gráficas (Bode e Fasorial) utilizam a biblioteca **Matplotlib**.
+## ✨ Funcionalidades Avançadas na V2.0
 
-## ✨ Funcionalidades Principais
+### 1. 🎨 Interface de Usuário (UX/UI)
+* **Estética Moderna:** Implementação do **`ttkbootstrap`** para aplicar um tema escuro e visualmente agradável, com componentes estilizados no padrão Bootstrap.
+* **Interação Avançada:** Integração nativa de `matplotlib` no Tkinter (`FigureCanvasTkAgg`) e adição de **barras de rolagem** para garantir que o conteúdo se ajuste a qualquer tela.
+* **Usabilidade:** Adição de **Tooltips (Dicas de Ferramenta)** e **Legendas Visuais coloridas** para guiar o usuário.
 
-O simulador implementa a lógica necessária para o cálculo de grandezas elétricas no domínio fasorial:
+### 2. ⚙️ Cálculos e Modelagem de Entrada
+* **Unidades de Engenharia:** A função `parse_unit_input` permite que o usuário insira valores de R, L e C usando sufixos comuns de engenharia (pico, nano, micro, mili, quilo), como **`10uF`** ou **`5mH`**.
+* **Fasor de Fonte:** Suporte para definição de **ângulo da fonte**, permitindo a análise fasorial completa com grandezas defasadas da referência.
 
-* **Construção de Circuitos:** Permite a adição sequencial de grupos de componentes (R, L, C, RL, RC, RLC em Série ou Impedância Conhecida) e a conexão desses grupos (Série ou Paralelo) para formar um circuito principal.
-* **Cálculo de Impedância:** Calcula a impedância equivalente total ($Z_{eq}$) do circuito na frequência base.
-* **Análise de Potência:** Calcula as potências **Ativa (P)**, **Reativa (Q)**, **Aparente (S)** e o **Fator de Potência (FP)**.
-* **Análise Fasorial:** Calcula e plota os fasores de tensão e corrente de *todos* os componentes do circuito (usando a função recursiva `_propagate_phasors`).
-* **Diagrama de Bode:** Plota a resposta em frequência (Magnitude da Impedância em dB) para análise de filtros e ressonância.
+### 3. 📊 Visualização Interativa
+* **Gráficos Embutidos:** Plotagem do Diagrama de Bode, Triângulo de Potências e Diagrama Fasorial diretamente na interface principal.
+* **Rótulos Arrastáveis:** Funcionalidade única que permite ao usuário **clicar e arrastar os rótulos de fasores (V e I)** no diagrama complexo para evitar sobreposição e melhorar a legibilidade.
 
-## ⚙️ Arquitetura e Estrutura de Classes (Versão 1.0)
+### 4. 📄 Documentação e Exportação
+* **Relatórios Profissionais:** Implementação da biblioteca **`FPDF`** para gerar e salvar relatórios detalhados da simulação em formato **PDF** ou TXT, incluindo o histórico de redução do circuito.
 
-O código utiliza uma arquitetura orientada a objetos para modelar o circuito:
+## ⚙️ Tecnologias Utilizadas
 
-| Classe/Objeto | Descrição |
-| :--- | :--- |
-| `Component` (Base) | Classe base para elementos R, L, C e Z Conhecida. Implementa o método `calculate_impedance`. |
-| `CircuitGroup` | Representa agrupamentos de componentes (ou outros grupos) em **Série** ou **Paralelo**. Implementa a regra de combinação de impedâncias. |
-| `CalculadoraCircuitosPorGrupo` | A classe principal que gerencia a GUI (Tkinter), a lógica de entrada de dados e a visualização dos resultados/gráficos (Matplotlib). |
-| **Lógica Fasorial** | O módulo utiliza a biblioteca **`cmath`** (Python) para lidar com operações complexas, representando os fasores elétricos. |
+| Componente | Tecnologia | Função |
+| :--- | :--- | :--- |
+| **GUI Principal** | Python + `tkinter` | Estrutura da janela e widgets. |
+| **Estética/Tema** | `ttkbootstrap` | Estilização moderna da interface. |
+| **Cálculos de CA** | `cmath`, `numpy` | Operações com números complexos (fasores). |
+| **Gráficos** | `matplotlib` | Plotagem científica e interativa. |
+| **Relatórios** | `fpdf` | Geração de arquivos PDF de resultados. |
 
 ## 🚀 Como Executar o Projeto
 
 ### Pré-requisitos
-Você precisará do **Python 3.x** e das seguintes bibliotecas:
+Você precisará do **Python 3.x** e das bibliotecas listadas no `requirements.txt`.
 
-```bash
-pip install numpy matplotlib
+### 1. `requirements.txt` (Conteúdo Final)
 
-(O tkinter geralmente já vem instalado com a distribuição padrão do Python).
+Certifique-se de que o arquivo `requirements.txt` esteja na raiz com o seguinte:
 
-Passos de Execução
-1- Clone o repositório (após o seu git push ser bem-sucedido):
-
-*bash*:git clone [https://github.com/otoniel-star/simulador-de-circuito-em-python.git](https://github.com/otoniel-star/simulador-de-circuito-em-python.git)
-cd simulador-de-circuito-em-python
-
-2- Execute o script principal:
-python "import tkinter as tk.py"
-
-Nota: Se o nome do arquivo foi corrigido localmente para main.py ou simulador.py, use o nome correto.
-📈 Exemplo de UsoDefina a Tensão da Fonte (V_rms) e a Frequência Base (f).Crie um grupo, por exemplo, um "RL (Série)" com $R = 10 \Omega$ e $L = 0.1 H$.Clique em "Calcular Impedância do Grupo".Clique em "Adicionar em Série" (ou Paralelo) para adicionar ao circuito principal.Repita os passos 2-4 para adicionar mais elementos.Clique em "Plotar Diagrama Fasorial" para ver a relação de fase de todas as grandezas.
+```txt
+numpy
+matplotlib
+ttkbootstrap
+fpdf

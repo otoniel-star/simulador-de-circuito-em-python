@@ -46,3 +46,9 @@ numpy
 matplotlib
 ttkbootstrap
 fpdf
+2. Instalar as Dependências
+pip install -r requirements.txt
+
+3. Executar o Aplicativo
+Renomeie o arquivo de código (import tkinter as tk.py) para algo simples como simulador.py.
+python simulador.py
